@@ -10,10 +10,16 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
+      - darwin
       - linux
+      - windows
     goarch:
       - amd64
+      - 386
+      - arm
       - arm64
+    goarm:
+      - 7
   - main: drivers/sqlboiler-psql/main.go
     id: sqlboiler-psql
     binary: sqlboiler-psql
@@ -24,10 +30,16 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
+      - darwin
       - linux
+      - windows
     goarch:
       - amd64
+      - 386
+      - arm
       - arm64
+    goarm:
+      - 7
   - main: drivers/sqlboiler-mysql/main.go
     id: sqlboiler-mysql
     binary: sqlboiler-mysql
@@ -38,10 +50,16 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
+      - darwin
       - linux
+      - windows
     goarch:
       - amd64
+      - 386
+      - arm
       - arm64
+    goarm:
+      - 7
   - main: drivers/sqlboiler-mssql/main.go
     id: sqlboiler-mssql
     binary: sqlboiler-mssql
@@ -52,69 +70,75 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
+      - darwin
       - linux
+      - windows
     goarch:
       - amd64
+      - 386
+      - arm
       - arm64
+    goarm:
+      - 7
 
-#nfpms:
-#  -
-#    formats:
-#      - apk
-#      - deb
-#      - rpm
-#    vendor: "sqlboiler"
-#    homepage: "https://github.com/volatiletech/sqlboiler"
-#    maintainer: "Tomoya Amachi <tomoya.amachi@gmail.com>"
-#    license: "BSD-3"
-#    description: "Generate a Go ORM tailored to your database schema."
-#    file_name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
-#    replacements:
-#      amd64: 64bit
-#      386: 32bit
-#      arm: ARM
-#      arm64: ARM64
-#      darwin: macOS
-#      linux: Linux
-#      windows: Windows
-#      openbsd: OpenBSD
-#      netbsd: NetBSD
-#      freebsd: FreeBSD
-#      dragonfly: DragonFlyBSD
-#
-#archives:
-#  -
-#    format: tar.gz
-#    format_overrides:
-#      - goos: windows
-#        format: zip
-#    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
-#    replacements:
-#      amd64: 64bit
-#      386: 32bit
-#      arm: ARM
-#      arm64: ARM64
-#      darwin: macOS
-#      linux: Linux
-#      windows: Windows
-#      openbsd: OpenBSD
-#      netbsd: NetBSD
-#      freebsd: FreeBSD
-#      dragonfly: DragonFlyBSD
-#    files:
-#      - README.md
-#      - LICENSE
+nfpms:
+  -
+    formats:
+      - apk
+      - deb
+      - rpm
+    vendor: "sqlboiler"
+    homepage: "https://github.com/volatiletech/sqlboiler"
+    maintainer: "Tomoya Amachi <tomoya.amachi@gmail.com>"
+    license: "BSD-3"
+    description: "Generate a Go ORM tailored to your database schema."
+    file_name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+    replacements:
+      amd64: 64bit
+      386: 32bit
+      arm: ARM
+      arm64: ARM64
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      openbsd: OpenBSD
+      netbsd: NetBSD
+      freebsd: FreeBSD
+      dragonfly: DragonFlyBSD
 
-#brews:
-#  -
-#    tap:
-#      owner: goodwithtech
-#      name: homebrew-r
-#    folder: Formula
-#    homepage: "https://github.com/volatiletech/sqlboiler"
-#    description: "Generate a Go ORM tailored to your database schema."
-#    test: |
-#      system "#{bin}/program --version"
+archives:
+  -
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+    replacements:
+      amd64: 64bit
+      386: 32bit
+      arm: ARM
+      arm64: ARM64
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      openbsd: OpenBSD
+      netbsd: NetBSD
+      freebsd: FreeBSD
+      dragonfly: DragonFlyBSD
+    files:
+      - README.md
+      - LICENSE
+
+brews:
+  -
+    tap:
+      owner: goodwithtech
+      name: homebrew-r
+    folder: Formula
+    homepage: "https://github.com/volatiletech/sqlboiler"
+    description: "Generate a Go ORM tailored to your database schema."
+    test: |
+      system "#{bin}/program --version"
 
 dockers:
   - image_templates:
