@@ -14,7 +14,7 @@ builds:
     goarch:
       - amd64
       - arm64
-  - main: driver/sqlboiler-psql/main.go
+  - main: drivers/sqlboiler-psql/main.go
     id: sqlboiler-psql
     binary: sqlboiler-psql
     ldflags:
@@ -28,7 +28,7 @@ builds:
     goarch:
       - amd64
       - arm64
-  - main: driver/sqlboiler-mysql/main.go
+  - main: drivers/sqlboiler-mysql/main.go
     id: sqlboiler-mysql
     binary: sqlboiler-mysql
     ldflags:
@@ -42,7 +42,7 @@ builds:
     goarch:
       - amd64
       - arm64
-  - main: driver/sqlboiler-mssql/main.go
+  - main: drivers/sqlboiler-mssql/main.go
     id: sqlboiler-mssql
     binary: sqlboiler-mssql
     ldflags:
