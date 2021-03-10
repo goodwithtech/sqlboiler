@@ -24,10 +24,10 @@ jobs:
           key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
           restore-keys: |
             ${{ runner.os }}-go-
-      - run: |
-          go test ./...
-        env:
-          CGO_ENABLED: 0
+#      - run: |
+#          go test ./...
+#        env:
+#          CGO_ENABLED: 0
       -
         name: Docker Login
         env:
