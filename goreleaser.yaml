@@ -1,0 +1,180 @@
+project_name: sqlboiler
+builds:
+  - main: ./main.go
+    binary: sqlboiler
+    ldflags:
+      - -s -w
+      - "-extldflags '-static'"
+      - -X main.version={{.Version}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - 7
+  - main: driver/sqlboiler-psql/main.go
+    binary: sqlboiler-psql
+    ldflags:
+      - -s -w
+      - "-extldflags '-static'"
+      - -X main.version={{.Version}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - 7
+  - main: driver/sqlboiler-mysql/main.go
+    binary: sqlboiler-mysql
+    ldflags:
+      - -s -w
+      - "-extldflags '-static'"
+      - -X main.version={{.Version}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - 7
+  - main: driver/sqlboiler-mssql/main.go
+    binary: sqlboiler-mssql
+    ldflags:
+      - -s -w
+      - "-extldflags '-static'"
+      - -X main.version={{.Version}}
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - darwin
+      - linux
+      - windows
+    goarch:
+      - amd64
+      - 386
+      - arm
+      - arm64
+    goarm:
+      - 7
+nfpms:
+  -
+    formats:
+      - apk
+      - deb
+      - rpm
+    vendor: "sqlboiler"
+    homepage: "https://github.com/volatiletech/sqlboiler"
+    maintainer: "Tomoya Amachi <tomoya.amachi@gmail.com>"
+    license: "BSD-3"
+    description: "Generate a Go ORM tailored to your database schema."
+    file_name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+    replacements:
+      amd64: 64bit
+      386: 32bit
+      arm: ARM
+      arm64: ARM64
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      openbsd: OpenBSD
+      netbsd: NetBSD
+      freebsd: FreeBSD
+      dragonfly: DragonFlyBSD
+
+archives:
+  -
+    format: tar.gz
+    format_overrides:
+      - goos: windows
+        format: zip
+    name_template: "{{.ProjectName}}_{{.Version}}_{{.Os}}-{{.Arch}}"
+    replacements:
+      amd64: 64bit
+      386: 32bit
+      arm: ARM
+      arm64: ARM64
+      darwin: macOS
+      linux: Linux
+      windows: Windows
+      openbsd: OpenBSD
+      netbsd: NetBSD
+      freebsd: FreeBSD
+      dragonfly: DragonFlyBSD
+    files:
+      - README.md
+      - LICENSE
+
+brews:
+  -
+    tap:
+      owner: goodwithtech
+      name: homebrew-r
+    folder: Formula
+    homepage: "https://github.com/volatiletech/sqlboiler"
+    description: "Generate a Go ORM tailored to your database schema."
+    test: |
+      system "#{bin}/program --version"
+
+dockers:
+  - image_templates:
+      - 'goodwithtech/sqlboiler:{{ .Tag }}-amd64'
+      - 'ghcr.io/goodwithtech/sqlboiler:{{ .Tag }}-amd64'
+    dockerfile: Dockerfile.releaser
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--platform=linux/amd64"
+  - image_templates:
+      - 'goodwithtech/sqlboiler:{{ .Tag }}-arm64'
+      - 'ghcr.io/goodwithtech/sqlboiler:{{ .Tag }}-arm64'
+    dockerfile: Dockerfile.releaser
+    build_flag_templates:
+      - "--pull"
+      - "--label=org.opencontainers.image.created={{.Date}}"
+      - "--label=org.opencontainers.image.name={{.ProjectName}}"
+      - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+      - "--label=org.opencontainers.image.version={{.Version}}"
+      - "--label=org.opencontainers.image.source={{.GitURL}}"
+      - "--platform=linux/arm64"
+    goarch: arm64
+docker_manifests:
+  - name_template: 'goodwithtech/sqlboiler:{{ .Tag }}'
+    image_templates:
+      - 'goodwithtech/sqlboiler:{{ .Tag }}-amd64'
+      - 'goodwithtech/sqlboiler:{{ .Tag }}-arm64'
+  - name_template: 'ghcr.io/goodwithtech/sqlboiler:{{ .Tag }}'
+    image_templates:
+      - 'ghcr.io/goodwithtech/sqlboiler:{{ .Tag }}-amd64'
+      - 'ghcr.io/goodwithtech/sqlboiler:{{ .Tag }}-arm64'
+  - name_template: 'goodwithtech/sqlboiler:latest'
+    image_templates:
+      - 'goodwithtech/sqlboiler:{{ .Tag }}-amd64'
+      - 'goodwithtech/sqlboiler:{{ .Tag }}-arm64'
+  - name_template: 'ghcr.io/goodwithtech/sqlboiler:latest'
+    image_templates:
+      - 'ghcr.io/goodwithtech/sqlboiler:{{ .Tag }}-amd64'
+      - 'ghcr.io/goodwithtech/sqlboiler:{{ .Tag }}-arm64'
