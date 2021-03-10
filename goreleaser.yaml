@@ -1,6 +1,7 @@
 project_name: sqlboiler
 builds:
   - main: ./main.go
+    id: sqlboiler
     binary: sqlboiler
     ldflags:
       - -s -w
@@ -9,17 +10,12 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
-      - darwin
       - linux
-      - windows
     goarch:
       - amd64
-      - 386
-      - arm
       - arm64
-    goarm:
-      - 7
   - main: driver/sqlboiler-psql/main.go
+    id: sqlboiler-psql
     binary: sqlboiler-psql
     ldflags:
       - -s -w
@@ -28,17 +24,12 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
-      - darwin
       - linux
-      - windows
     goarch:
       - amd64
-      - 386
-      - arm
       - arm64
-    goarm:
-      - 7
   - main: driver/sqlboiler-mysql/main.go
+    id: sqlboiler-mysql
     binary: sqlboiler-mysql
     ldflags:
       - -s -w
@@ -47,17 +38,12 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
-      - darwin
       - linux
-      - windows
     goarch:
       - amd64
-      - 386
-      - arm
       - arm64
-    goarm:
-      - 7
   - main: driver/sqlboiler-mssql/main.go
+    id: sqlboiler-mssql
     binary: sqlboiler-mssql
     ldflags:
       - -s -w
@@ -66,16 +52,10 @@ builds:
     env:
       - CGO_ENABLED=0
     goos:
-      - darwin
       - linux
-      - windows
     goarch:
       - amd64
-      - 386
-      - arm
       - arm64
-    goarm:
-      - 7
 nfpms:
   -
     formats:
