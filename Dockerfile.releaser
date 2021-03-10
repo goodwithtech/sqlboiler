@@ -1,6 +1,6 @@
 FROM alpine:3.13
-COPY sqlboiler /usr/local/bin/sqlboiler
-COPY sqlboiler-psql /usr/local/bin/sqlboiler-psql
-COPY sqlboiler-mysql /usr/local/bin/sqlboiler-mysql
-COPY sqlboiler-mssql /usr/local/bin/sqlboiler-mssql
+COPY sqlboiler sqlboiler
+COPY sqlboiler-psql sqlboiler-psql
+COPY sqlboiler-mysql sqlboiler-mysql
+COPY sqlboiler-mssql sqlboiler-mssql
 ENTRYPOINT ["sqlboiler"]
