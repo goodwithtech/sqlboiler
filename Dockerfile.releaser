@@ -3,4 +3,5 @@ COPY sqlboiler sqlboiler
 COPY sqlboiler-psql sqlboiler-psql
 COPY sqlboiler-mysql sqlboiler-mysql
 COPY sqlboiler-mssql sqlboiler-mssql
-ENTRYPOINT ["sqlboiler"]
+# docker run sqlboiler:vX.X.X --wipe /sqlboiler-psq ...
+ENTRYPOINT ["/sqlboiler"]
